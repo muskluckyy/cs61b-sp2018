@@ -1,5 +1,7 @@
 import java.util.Formatter;
 
+//import static com.sun.tools.classfile.Module_attribute.RequiresEntry.length;
+
 /**
  * A naked recursive list of integers, similar to what we saw in lecture 3, but
  * with a large number of additional methods.
@@ -16,6 +18,7 @@ public class IntList {
      * Remaining elements of list.
      */
     public IntList rest;
+    private int length;
 
     /**
      * A List with first FIRST0 and rest REST0.
@@ -82,7 +85,15 @@ public class IntList {
 
     public static IntList dcatenate(IntList A, IntList B) {
         //TODO:  fill in method
-        return null;
+        if (A == null) {
+            return B;
+        }
+        IntList temp = A;
+        while (temp.rest != null) {
+            temp = temp.rest;
+        }
+        temp.rest = B;
+        return A;
     }
 
     /**
@@ -91,7 +102,17 @@ public class IntList {
      */
     public static IntList catenate(IntList A, IntList B) {
         //TODO:  fill in method
-        return null;
+        IntList lastone = new IntList(A.first, null);
+        IntList tempA = A;
+        IntList templastone = lastone;
+        while (tempA.rest != null) {
+            tempA = tempA.rest;
+            templastone.rest = new IntList(tempA.first, null);
+            templastone = templastone.rest;
+        }
+        templastone.rest = B;
+        return lastone;
+
     }
 
 
